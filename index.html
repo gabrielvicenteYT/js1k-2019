@@ -9,26 +9,17 @@
     <script>
         a.style.width = a.style.height = '32em'
 
-        I = c.createImageData(t = 256, 256)
+        I = c.createImageData(256, 256)
         I.data.fill(256)
 
-        // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
-        /*
-        float sdCross( in vec2 p, in vec2 b, float r ) 
-        {
-            p = abs(p); p = (p.y>p.x) ? p.yx : p.xy;
-            
-            vec2  q = p - b;
-            float k = max(q.y,q.x);
-            vec2  w = (k>0.0) ? q : vec2(b.y-p.x,-k);
-            return sign(k)*length(max(w,0.0)) + r;
-        }
-        */
+        for (A = "RIFF_oO_WAVEfmt " + atob("EAAAAAEAAQBAHwAARKwAAAEACABkYXRh"), t = 0; 1e5 > ++t;) 
+            A += String.fromCharCode(((t & [135]) * (.5 * Math.sin(t/500) + .5)) & 255)
 
         setInterval(_ => {
             for (i = ++t % 7; i < 256 * 256; i += 7) {
                 x = i % 256 - 127
                 y = i / 256 - 127
+                // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
                 k = Math.max(Math.max(Math.abs(x - y), Math.abs(x + y)) - 99, Math.min(Math.abs(x - y), Math.abs(x + y))) % 27 < 20
                 v = x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33
                     + Math.sin(y / 33)
@@ -41,6 +32,7 @@
             }
             c.putImageData(I, 0, 0)
         }, 33)
+        a.onclick = _ => new Audio("data:audio/wav;base64," + btoa(A)).play()
     </script>
     <style>
     * { margin: 0; padding: 0; overflow: hidden; }
