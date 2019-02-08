@@ -12,6 +12,19 @@
         I = c.createImageData(t = 256, 256)
         I.data.fill(256)
 
+        // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
+        /*
+        float sdCross( in vec2 p, in vec2 b, float r ) 
+        {
+            p = abs(p); p = (p.y>p.x) ? p.yx : p.xy;
+            
+            vec2  q = p - b;
+            float k = max(q.y,q.x);
+            vec2  w = (k>0.0) ? q : vec2(b.y-p.x,-k);
+            return sign(k)*length(max(w,0.0)) + r;
+        }
+        */
+
         setInterval(_ => {
             for (i = ++t % 7; i < 256 * 256; i += 7) {
                 x = i % 256
@@ -19,8 +32,12 @@
                 v = x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33
                     + Math.sin(y / 33)
                     + Math.sin(x / 20)
-                    + Math.sin(Math.hypot(x - 127 + 99 * Math.cos(t / 42), y - 127 + 99 * Math.sin(t / 42)) / 20)
+                    + Math.sin(Math.hypot(x - 127 + 99 * Math.cos(t / 33), y - 127 + 99 * Math.sin(t / 33)) / 20)
                     - t / 10
+                X = Math.max(Math.abs(x - 127), Math.abs(y - 127)) - 77
+                Y = Math.min(Math.abs(x - 127), Math.abs(y - 127))
+                k = Math.max(X, Y)
+                v *= k > 20
                 I.data[i * 4] = 127 + 127 * Math.cos(t / 30 + v)
                 I.data[i * 4 + 1] = 127 + 127 * Math.cos(t / 10 + v * 2)
                 I.data[i * 4 + 2] = 127 + 127 * Math.cos(t / 13 + v * 3)
