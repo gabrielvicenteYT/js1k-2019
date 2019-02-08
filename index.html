@@ -1,0 +1,32 @@
+<body id=b>
+    <canvas id=a></canvas>
+    <script>
+    c = a.getContext('2d')
+    a.width = 256;
+    a.height = 256;
+    </script>
+    
+    <script>
+        a.style.width = a.style.height = '32em'
+
+        I = c.createImageData(t = 256, 256)
+        I.data.fill(256)
+
+        setInterval(_ => {
+            for (i = ++t % 7; i < 256 * 256; i += 7) {
+                x = i % 256
+                y = i / 256
+                v = x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33
+                    + Math.sin(y / 33)
+                    + Math.sin(x / 20)
+                    + Math.sin(Math.hypot(x - 127 + 99 * Math.cos(t / 42), y - 127 + 99 * Math.sin(t / 42)) / 20)
+                    - t / 10
+                I.data[i * 4] = 127 + 127 * Math.cos(t / 30 + v)
+                I.data[i * 4 + 1] = 127 + 127 * Math.cos(t / 10 + v * 2)
+                I.data[i * 4 + 2] = 127 + 127 * Math.cos(t / 13 + v * 3)
+            }
+            c.putImageData(I, 0, 0)
+        }, 33)
+    </script>
+    <style>
+    * { margin: 0; padding: 0; overflow: hidden; }
