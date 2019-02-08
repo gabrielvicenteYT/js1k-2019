@@ -27,17 +27,16 @@
 
         setInterval(_ => {
             for (i = ++t % 7; i < 256 * 256; i += 7) {
-                x = i % 256
-                y = i / 256
+                x = i % 256 - 127
+                y = i / 256 - 127
                 v = x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33
                     + Math.sin(y / 33)
                     + Math.sin(x / 20)
                     + Math.sin(Math.hypot(x - 127 + 99 * Math.cos(t / 33), y - 127 + 99 * Math.sin(t / 33)) / 20)
                     - t / 10
-                X = Math.max(Math.abs(x - 127), Math.abs(y - 127)) - 77
-                Y = Math.min(Math.abs(x - 127), Math.abs(y - 127))
-                k = Math.max(X, Y)
-                v *= k > 20
+                X = Math.max(Math.abs(x - y), Math.abs(x + y)) - 99
+                Y = Math.min(Math.abs(x - y), Math.abs(x + y))
+                v *= Math.max(X, Y) > 33
                 I.data[i * 4] = 127 + 127 * Math.cos(t / 30 + v)
                 I.data[i * 4 + 1] = 127 + 127 * Math.cos(t / 10 + v * 2)
                 I.data[i * 4 + 2] = 127 + 127 * Math.cos(t / 13 + v * 3)
