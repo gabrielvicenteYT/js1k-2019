@@ -1,19 +1,21 @@
 <body id=b>
     <canvas id=a></canvas>
     <script>
-    c = a.getContext('2d')
-    a.width = 256;
-    a.height = 256;
+        c = a.getContext('2d')
+        a.width = 256;
+        a.height = 256;
     </script>
-    
+
     <script>
         a.style.width = a.style.height = '32em'
 
         I = c.createImageData(256, 256)
         I.data.fill(256)
 
-        for (A = "RIFF_oO_WAVEfmt " + atob("EAAAAAEAAQBAHwAARKwAAAEACABkYXRh"), t = 0; t++ < 314159;) 
-            A += String.fromCharCode(((t & [135]) * (.5 * Math.sin(t/500) + .5)) & 255)
+        // https://js1k.com/2015-hypetrain/details/2322
+        A = "RIFF_oO_WAVEfmt " + atob("EAAAAAEAAQBErAAARKwAAAEACABkYXRh")
+        for (t = 0; t++ < 63e4;)
+            A += String.fromCharCode(127 + (t / 200 % 2 > 1) * (t / (500 + Math.cos(t / 1e5) * 500) % 2 > 1) * 33)
 
         setInterval(_ => {
             for (i = ++t % 7; i < 256 * 256; i += 7) {
@@ -32,9 +34,14 @@
             }
             c.putImageData(I, 0, 0)
         }, 33)
+
         A = new Audio("data:audio/wav;base64," + btoa(A))
         A.loop = true
         onclick = _ => A.play()
     </script>
     <style>
-    * { margin: 0; padding: 0; overflow: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
