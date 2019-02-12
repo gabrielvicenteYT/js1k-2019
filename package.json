@@ -1,0 +1,17 @@
+{
+  "name": "js1k-2019",
+  "author": "prplz",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "regpack": "git+https://github.com/Siorki/RegPack.git#master"
+  },
+  "scripts": {
+    "start": "gulp"
+  }
+}
