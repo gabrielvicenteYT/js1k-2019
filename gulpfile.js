@@ -4,6 +4,7 @@ const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const cmdRegPack = require('regpack').cmdRegPack;
+const log = require('fancy-log');
 
 function minify() {
   return gulp.src('src/full.js')
@@ -21,12 +22,15 @@ function minify() {
 
 function regpack(cb) {
   const js = fs.readFileSync('dist/min.js', 'utf8');
-  const packed = [
-    cmdRegPack(js, { reassignVars: false, crushGainFactor: 1, crushLengthFactor: 0 }),
-    cmdRegPack(js, { reassignVars: false, crushGainFactor: 2, crushLengthFactor: 1 })
+  const args = [
+    { reassignVars: false, crushGainFactor: 1, crushLengthFactor: 0 },
+    { reassignVars: false, crushGainFactor: 2, crushLengthFactor: 1 }
   ];
-  const best = packed.reduce((a, b) => b.length < a.length ? b : a);
-  fs.writeFileSync('dist/packed.js', best);
+  const [options, packed] = args
+    .map(a => [a, cmdRegPack(js, { ...a })])
+    .reduce((a, b) => b[1].length < a[1].length ? b : a);
+  log.info(`Using regpack options ${JSON.stringify(options)} for ${packed.length} bytes`)
+  fs.writeFileSync('dist/packed.js', packed);
   cb();
 }
 
