@@ -1,6 +1,6 @@
 a.style.width = a.style.height = '32em',
-I = c.createImageData(256, 256),
-I.data.fill(t=256)
+    I = c.createImageData(256, 256),
+    I.data.fill(t = 256)
 
 setInterval(_ => {
     for (i = ++t % 7; i < 256 * 256; i += 7)
@@ -16,5 +16,16 @@ setInterval(_ => {
             I.data[i * 4] = 127 * k + 127 * Math.cos(t / 30 + v),
             I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2),
             I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3)
-    c.putImageData(I, 0, 0)
+    createImageBitmap(I).then(I =>
+        c.resetTransform(),
+        c.fillRect(0, 0, 256, 256),
+        c.setTransform(
+            Math.cos(t / 33) * (Math.sin(t / 33) / 2 + 1),
+            -Math.sin(t / 33) * (Math.sin(t / 33) / 2 + 1),
+            Math.sin(t / 33) * (Math.sin(t / 33) / 2 + 1),
+            Math.cos(t / 33) * (Math.sin(t / 33) / 2 + 1),
+            127,
+            127),
+        c.drawImage(I, -127, -127)
+    )
 }, 33)
