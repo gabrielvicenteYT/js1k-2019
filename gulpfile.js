@@ -21,8 +21,12 @@ function minify() {
 
 function regpack(cb) {
   const js = fs.readFileSync('dist/min.js', 'utf8');
-  const packed = cmdRegPack(js, { reassignVars: false });
-  fs.writeFileSync('dist/packed.js', packed);
+  const packed = [
+    cmdRegPack(js, { reassignVars: false, crushGainFactor: 1, crushLengthFactor: 0 }),
+    cmdRegPack(js, { reassignVars: false, crushGainFactor: 2, crushLengthFactor: 1 })
+  ];
+  const best = packed.reduce((a, b) => b.length < a.length ? b : a);
+  fs.writeFileSync('dist/packed.js', best);
   cb();
 }
 
