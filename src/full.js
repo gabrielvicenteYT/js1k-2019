@@ -1,11 +1,6 @@
-// https://js1k.com/2015-hypetrain/details/2322
-for (a.style.width = a.style.height = '32em',
-    I = c.createImageData(256, 256),
-    I.data.fill(256),
-    A = "RIFF_oO_WAVEfmt " + atob("EAAAAAEAAQBErAAARKwAAAEACABkYXRh"),
-    t = 0;
-    t++ < 63e4;)
-    A += String.fromCharCode(127 + (t / 200 % 2 > 1) * (t / (500 + 500 * Math.cos(t / 1e5)) % 2 > 1) * 33)
+a.style.width = a.style.height = '32em',
+I = c.createImageData(256, 256),
+I.data.fill(t=256)
 
 setInterval(_ => {
     for (i = ++t % 7; i < 256 * 256; i += 7)
@@ -23,5 +18,3 @@ setInterval(_ => {
             I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3)
     c.putImageData(I, 0, 0)
 }, 33)
-A = new Audio("data:audio/wav;base64," + btoa(A))
-A.loop = onclick = _ => A.play()
