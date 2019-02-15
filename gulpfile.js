@@ -1,3 +1,5 @@
+// Based on the gulpfile from https://github.com/veu/js1k-2017
+
 const fs = require('fs');
 const gulp = require('gulp');
 const babel = require('gulp-babel');
