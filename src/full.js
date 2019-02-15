@@ -25,8 +25,8 @@ setInterval(_ => {
             Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             0,
             Math.cos(t / 99 /*pitch*/),
-            a.width / 2 + Math.sin(t / 33 /*yaw*/) * 128 * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)),
-            a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * 128 * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)))
+            a.width / 2 + Math.sin(t / 33 /*yaw*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
+            a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
         c.drawImage(I, -128, -128)
 
         // left/right
@@ -35,8 +35,8 @@ setInterval(_ => {
             Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             0,
             Math.cos(t / 99 /*pitch*/),
-            a.width / 2 - Math.cos(t / 33 /*yaw*/) * 128 * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)),
-            a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * 128 * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)))
+            a.width / 2 - Math.cos(t / 33 /*yaw*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
+            a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
         c.drawImage(I, -128, -128)
 
         // top/bottom
@@ -46,7 +46,7 @@ setInterval(_ => {
             Math.sin(t / 33 /*yaw*/),
             -Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             a.width / 2,
-            a.height / 2 + Math.cos(t / 99 /*pitch*/) * 128 * Math.sign(Math.sin(t / 99 /*pitch*/)))
+            a.height / 2 + Math.cos(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 99 /*pitch*/)) * 128)
         c.drawImage(I, -128, -128)
     })
 }, 33)
