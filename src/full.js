@@ -1,6 +1,6 @@
-n = document.createElement('canvas'),
-    o = n.getContext`2d`,
-    I = c.createImageData(256, 256),
+n = document.createElement`canvas`
+o = n.getContext`2d`
+I = c.createImageData(256, 256),
     I.data.fill(t = n.width = n.height = 256)
 
 setInterval(_ => {
@@ -8,7 +8,7 @@ setInterval(_ => {
         x = i % 256 - 128,
             y = i / 256 - 128,
             // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
-            k = Math.abs(30 - Math.max(Math.max(Math.abs(x - y), Math.abs(x + y)) - 99, Math.min(Math.abs(x - y), Math.abs(x + y)))) > 10,
+            k = Math.abs(30 - Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99)) > 10,
             v = Math.sin(x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33)
             + Math.sin(y / 33)
             + Math.sin(x / 20)
