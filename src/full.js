@@ -20,63 +20,37 @@ setInterval(_ => {
         c.fillRect(0, 0, a.width, a.height)
         c.strokeStyle = 'white'
 
-        const yaw = t / 33;
-        const pitch = t / 99;
+        const Y = t / 33; // yaw
+        const P = t / 99; // pitch
 
-        // front + back
+        // front/back
         c.setTransform(
-            Math.cos(yaw),
-            Math.sin(yaw) * Math.sin(pitch),
+            Math.cos(Y),
+            Math.sin(Y) * Math.sin(P),
             0,
-            Math.cos(pitch),
-            a.width / 2 + Math.sin(yaw) * 128,
-            a.height / 2 - Math.cos(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
-        c.setTransform(
-            -Math.cos(yaw),
-            -Math.sin(yaw) * Math.sin(pitch),
-            0,
-            -Math.cos(pitch),
-            a.width / 2 - Math.sin(yaw) * 128,
-            a.height / 2 + Math.cos(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
+            Math.cos(P),
+            a.width / 2 + Math.sin(Y) * 128 * Math.sign(Math.cos(Y) * Math.cos(P)),
+            a.height / 2 - Math.cos(Y) * Math.sin(P) * 128 * Math.sign(Math.cos(Y) * Math.cos(P)))
+        c.drawImage(I, -128, -128)
 
-        // left + right
+        // left/right
         c.setTransform(
-            -Math.sin(yaw),
-            Math.cos(yaw) * Math.sin(pitch),
+            -Math.sin(Y),
+            Math.cos(Y) * Math.sin(P),
             0,
-            Math.cos(pitch),
-            a.width / 2 + Math.cos(yaw) * 128,
-            a.height / 2 + Math.sin(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
-        c.setTransform(
-            Math.sin(yaw),
-            -Math.cos(yaw) * Math.sin(pitch),
-            0,
-            -Math.cos(pitch),
-            a.width / 2 - Math.cos(yaw) * 128,
-            a.height / 2 - Math.sin(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
+            Math.cos(P),
+            a.width / 2 - Math.cos(Y) * 128 * Math.sign(Math.sin(Y) * Math.cos(P)),
+            a.height / 2 - Math.sin(Y) * Math.sin(P) * 128 * Math.sign(Math.sin(Y) * Math.cos(P)))
+        c.drawImage(I, -128, -128)
 
-        // top + bottom
+        // top/bottom
         c.setTransform(
-            Math.cos(yaw),
-            Math.sin(yaw) * Math.sin(pitch),
-            Math.sin(yaw),
-            -Math.cos(yaw) * Math.sin(pitch),
+            Math.cos(Y),
+            Math.sin(Y) * Math.sin(P),
+            Math.sin(Y),
+            -Math.cos(Y) * Math.sin(P),
             a.width / 2,
-            a.height / 2 + Math.cos(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
-        c.setTransform(
-            -Math.cos(yaw),
-            -Math.sin(yaw) * Math.sin(pitch),
-            -Math.sin(yaw),
-            Math.cos(yaw) * Math.sin(pitch),
-            a.width / 2,
-            a.height / 2 - Math.cos(pitch) * 128)
-        c.strokeRect(-100, -100, 200, 200)
-
-        //c.drawImage(I, -128, -128)
+            a.height / 2 + Math.cos(P) * 128 * Math.sign(Math.sin(P)))
+        c.drawImage(I, -128, -128)
     })
 }, 33)
