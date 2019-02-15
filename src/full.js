@@ -18,39 +18,35 @@ setInterval(_ => {
     createImageBitmap(I).then(I => { // this is probably hugely wasteful, maybe find a better way?
         c.resetTransform()
         c.fillRect(0, 0, a.width, a.height)
-        c.strokeStyle = 'white'
-
-        const Y = t / 33; // yaw
-        const P = t / 99; // pitch
 
         // front/back
         c.setTransform(
-            Math.cos(Y),
-            Math.sin(Y) * Math.sin(P),
+            Math.cos(t / 33 /*yaw*/),
+            Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             0,
-            Math.cos(P),
-            a.width / 2 + Math.sin(Y) * 128 * Math.sign(Math.cos(Y) * Math.cos(P)),
-            a.height / 2 - Math.cos(Y) * Math.sin(P) * 128 * Math.sign(Math.cos(Y) * Math.cos(P)))
+            Math.cos(t / 99 /*pitch*/),
+            a.width / 2 + Math.sin(t / 33 /*yaw*/) * 128 * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)),
+            a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * 128 * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)))
         c.drawImage(I, -128, -128)
 
         // left/right
         c.setTransform(
-            -Math.sin(Y),
-            Math.cos(Y) * Math.sin(P),
+            -Math.sin(t / 33 /*yaw*/),
+            Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             0,
-            Math.cos(P),
-            a.width / 2 - Math.cos(Y) * 128 * Math.sign(Math.sin(Y) * Math.cos(P)),
-            a.height / 2 - Math.sin(Y) * Math.sin(P) * 128 * Math.sign(Math.sin(Y) * Math.cos(P)))
+            Math.cos(t / 99 /*pitch*/),
+            a.width / 2 - Math.cos(t / 33 /*yaw*/) * 128 * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)),
+            a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * 128 * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)))
         c.drawImage(I, -128, -128)
 
         // top/bottom
         c.setTransform(
-            Math.cos(Y),
-            Math.sin(Y) * Math.sin(P),
-            Math.sin(Y),
-            -Math.cos(Y) * Math.sin(P),
+            Math.cos(t / 33 /*yaw*/),
+            Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
+            Math.sin(t / 33 /*yaw*/),
+            -Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
             a.width / 2,
-            a.height / 2 + Math.cos(P) * 128 * Math.sign(Math.sin(P)))
+            a.height / 2 + Math.cos(t / 99 /*pitch*/) * 128 * Math.sign(Math.sin(t / 99 /*pitch*/)))
         c.drawImage(I, -128, -128)
     })
 }, 33)
