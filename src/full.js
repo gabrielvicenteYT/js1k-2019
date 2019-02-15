@@ -1,5 +1,7 @@
-I = c.createImageData(256, 256),
-    I.data.fill(t = 256)
+n = document.createElement('canvas'),
+    o = n.getContext`2d`,
+    I = c.createImageData(256, 256),
+    I.data.fill(t = n.width = n.height = 256),
 
 setInterval(_ => {
     for (i = ++t % 7; i < 256 * 256; i += 7)
@@ -15,38 +17,39 @@ setInterval(_ => {
             I.data[i * 4] = 127 * k + 127 * Math.cos(t / 30 + v),
             I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2),
             I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3)
-    createImageBitmap(I).then(I => { // this is probably hugely wasteful, maybe find a better way?
-        c.resetTransform()
-        c.fillRect(0, 0, a.width, a.height)
 
-        // front/back
-        c.setTransform(
-            Math.cos(t / 33 /*yaw*/),
-            Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
-            0,
-            Math.cos(t / 99 /*pitch*/),
-            a.width / 2 + Math.sin(t / 33 /*yaw*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
-            a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
-        c.drawImage(I, -128, -128)
+    o.putImageData(I, 0, 0)
 
-        // left/right
-        c.setTransform(
-            -Math.sin(t / 33 /*yaw*/),
-            Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
-            0,
-            Math.cos(t / 99 /*pitch*/),
-            a.width / 2 - Math.cos(t / 33 /*yaw*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
-            a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
-        c.drawImage(I, -128, -128)
+    c.resetTransform()
+    c.fillRect(0, 0, a.width, a.height)
 
-        // top/bottom
-        c.setTransform(
-            Math.cos(t / 33 /*yaw*/),
-            Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
-            Math.sin(t / 33 /*yaw*/),
-            -Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
-            a.width / 2,
-            a.height / 2 + Math.cos(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 99 /*pitch*/)) * 128)
-        c.drawImage(I, -128, -128)
-    })
+    // front/back
+    c.setTransform(
+        Math.cos(t / 33 /*yaw*/),
+        Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
+        0,
+        Math.cos(t / 99 /*pitch*/),
+        a.width / 2 + Math.sin(t / 33 /*yaw*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
+        a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
+    c.drawImage(n, -128, -128)
+
+    // left/right
+    c.setTransform(
+        -Math.sin(t / 33 /*yaw*/),
+        Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
+        0,
+        Math.cos(t / 99 /*pitch*/),
+        a.width / 2 - Math.cos(t / 33 /*yaw*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
+        a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
+    c.drawImage(n, -128, -128)
+
+    // top/bottom
+    c.setTransform(
+        Math.cos(t / 33 /*yaw*/),
+        Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
+        Math.sin(t / 33 /*yaw*/),
+        -Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
+        a.width / 2,
+        a.height / 2 + Math.cos(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 99 /*pitch*/)) * 128)
+    c.drawImage(n, -128, -128)
 }, 33)
