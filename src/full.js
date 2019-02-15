@@ -23,56 +23,59 @@ setInterval(_ => {
         const yaw = t / 33;
         const pitch = t / 99;
 
+        // front + back
         c.setTransform(
-            1,
+            Math.cos(yaw),
+            Math.sin(yaw) * Math.sin(pitch),
             0,
-            0,
-            1,
+            Math.cos(pitch),
             a.width / 2 + Math.sin(yaw) * 128,
             a.height / 2 - Math.cos(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
         c.setTransform(
-            1,
+            -Math.cos(yaw),
+            -Math.sin(yaw) * Math.sin(pitch),
             0,
-            0,
-            1,
+            -Math.cos(pitch),
             a.width / 2 - Math.sin(yaw) * 128,
             a.height / 2 + Math.cos(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
 
+        // left + right
         c.setTransform(
-            1,
+            -Math.sin(yaw),
+            Math.cos(yaw) * Math.sin(pitch),
             0,
-            0,
-            1,
+            Math.cos(pitch),
             a.width / 2 + Math.cos(yaw) * 128,
             a.height / 2 + Math.sin(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
         c.setTransform(
-            1,
+            Math.sin(yaw),
+            -Math.cos(yaw) * Math.sin(pitch),
             0,
-            0,
-            1,
+            -Math.cos(pitch),
             a.width / 2 - Math.cos(yaw) * 128,
             a.height / 2 - Math.sin(yaw) * Math.sin(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
 
+        // top + bottom
         c.setTransform(
-            1,
-            0,
-            0,
-            1,
+            Math.cos(yaw),
+            Math.sin(yaw) * Math.sin(pitch),
+            Math.sin(yaw),
+            -Math.cos(yaw) * Math.sin(pitch),
             a.width / 2,
             a.height / 2 + Math.cos(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
         c.setTransform(
-            1,
-            0,
-            0,
-            1,
+            -Math.cos(yaw),
+            -Math.sin(yaw) * Math.sin(pitch),
+            -Math.sin(yaw),
+            Math.cos(yaw) * Math.sin(pitch),
             a.width / 2,
             a.height / 2 - Math.cos(pitch) * 128)
-        c.strokeRect(-5, -5, 10, 10)
+        c.strokeRect(-100, -100, 200, 200)
 
         //c.drawImage(I, -128, -128)
     })
