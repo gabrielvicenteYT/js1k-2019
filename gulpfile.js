@@ -24,12 +24,13 @@ function minify() {
 
 function regpack(cb) {
   const js = fs.readFileSync('dist/min.js', 'utf8');
+  const defaults = { reassignVars: true, hash2DContext: true, contextVariableName: 'c' };
   const args = [
-    { reassignVars: false, crushGainFactor: 1, crushLengthFactor: 0 },
-    { reassignVars: false, crushGainFactor: 2, crushLengthFactor: 1 }
+    { crushGainFactor: 1, crushLengthFactor: 0 },
+    { crushGainFactor: 2, crushLengthFactor: 1 }
   ];
   const [options, packed] = args
-    .map(a => [a, cmdRegPack(js, { ...a })])
+    .map(a => [a, cmdRegPack(js, { ...defaults, ...a })])
     .reduce((a, b) => b[1].length < a[1].length ? b : a);
   log.info(`Using regpack options ${JSON.stringify(options)} for ${packed.length} bytes`)
   fs.writeFileSync('dist/packed.js', packed);
