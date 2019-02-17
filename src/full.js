@@ -20,7 +20,6 @@ setInterval(_ => {
     o.putImageData(I, 0, 0)
 
     c.resetTransform()
-    c.globalAlpha = 1
     c.fillRect(0, 0, a.width, a.height)
 
     // front/back
@@ -31,8 +30,7 @@ setInterval(_ => {
         Math.cos(t / 99 /*pitch*/),
         a.width / 2 + Math.sin(t / 33 /*yaw*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
         a.height / 2 - Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
-    c.globalAlpha = Math.abs(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/))
-    c.filter = 'hue-rotate(0deg)'
+    c.filter = 'hue-rotate(0deg)brightness(' + Math.abs(Math.cos(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/))
     c.drawImage(n, -128, -128)
 
     // left/right
@@ -43,8 +41,7 @@ setInterval(_ => {
         Math.cos(t / 99 /*pitch*/),
         a.width / 2 - Math.cos(t / 33 /*yaw*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128,
         a.height / 2 - Math.sin(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/)) * 128)
-    c.globalAlpha = Math.abs(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/))
-    c.filter = 'hue-rotate(120deg)'
+    c.filter = 'hue-rotate(120deg)brightness(' + Math.abs(Math.sin(t / 33 /*yaw*/) * Math.cos(t / 99 /*pitch*/))
     c.drawImage(n, -128, -128)
 
     // top/bottom
@@ -55,7 +52,6 @@ setInterval(_ => {
         -Math.cos(t / 33 /*yaw*/) * Math.sin(t / 99 /*pitch*/),
         a.width / 2,
         a.height / 2 + Math.cos(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 99 /*pitch*/)) * 128)
-    c.globalAlpha = Math.abs(Math.sin(t / 99 /*pitch*/))
-    c.filter = 'hue-rotate(250deg)'
+    c.filter = 'hue-rotate(250deg)brightness(' + Math.abs(Math.sin(t / 99 /*pitch*/))
     c.drawImage(n, -128, -128)
 }, 33)
