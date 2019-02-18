@@ -1,7 +1,6 @@
 n = document.createElement`canvas`
 o = n.getContext`2d`
-I = c.createImageData(256, 256),
-    I.data.fill(t = n.width = n.height = 256)
+I = c.createImageData(256, 256), I.data.fill(t = n.height = 256)
 
 setInterval(_ => {
     for (i = ++t % 7; i < 256 * 256; i += 7)
@@ -13,9 +12,9 @@ setInterval(_ => {
             + Math.sin(y / 33)
             + Math.sin(x / 20)
             + Math.sin(Math.hypot(x + 99 * Math.cos(t / 33), y + 99 * Math.sin(t / 33)) / 20),
-            I.data[i * 4] = 127 * k + 127 * Math.cos(t / 30 + v + 22 * k),
-            I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2 + 22 * k),
-            I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3 + 22 * k)
+            I.data[i * 4] = 127 * k + 127 * Math.cos(t / 30 + v + Math.PI * k),
+            I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2 + Math.PI * k),
+            I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3 + Math.PI * k)
 
     o.putImageData(I, 0, 0)
 
