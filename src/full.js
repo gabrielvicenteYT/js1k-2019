@@ -16,9 +16,7 @@ setInterval(_ => {
             I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2 + Math.PI * k),
             I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3 + Math.PI * k)
 
-    o.putImageData(I, 0, 0)
-
-    c.resetTransform()
+    c.resetTransform(o.putImageData(I, 0, 0))
     c.fillRect(0, 0, 512, 512)
 
     // front/back
