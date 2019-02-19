@@ -6,16 +6,16 @@ for (t = 12; --t; o.stroke())
     o.strokeStyle = t & 1 ? '#000' : '#fff',
         o.lineWidth = (t + (t + 1 >> 1)) * 14.14,
         o.beginPath(),
-        o.moveTo(128 - 50 - (t + (t + 1 >> 1)) * 5, 128 - 50 - (t + (t + 1 >> 1)) * 5),
-        o.lineTo(128 + 50 + (t + (t + 1 >> 1)) * 5, 128 + 50 + (t + (t + 1 >> 1)) * 5),
-        o.moveTo(128 - 50 - (t + (t + 1 >> 1)) * 5, 128 + 50 + (t + (t + 1 >> 1)) * 5),
-        o.lineTo(128 + 50 + (t + (t + 1 >> 1)) * 5, 128 - 50 - (t + (t + 1 >> 1)) * 5)
+        o.moveTo(78 - (t + (t + 1 >> 1)) * 5, 78 - (t + (t + 1 >> 1)) * 5),
+        o.lineTo(178 + (t + (t + 1 >> 1)) * 5, 178 + (t + (t + 1 >> 1)) * 5),
+        o.moveTo(78 - (t + (t + 1 >> 1)) * 5, 178 + (t + (t + 1 >> 1)) * 5),
+        o.lineTo(178 + (t + (t + 1 >> 1)) * 5, 78 - (t + (t + 1 >> 1)) * 5)
 
 
 setInterval(_ => {
     t++
-    c.resetTransform(c.globalAlpha = 1)
-    c.fillRect(0, 0, 512, 512)
+    c.resetTransform()
+    c.fillRect(c.globalAlpha = 1, 0, 512, 512)
 
     // front/back
     c.setTransform(
