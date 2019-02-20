@@ -1,17 +1,17 @@
 n = document.createElement`canvas`
 o = n.getContext`2d`
-I = c.createImageData(256, 256), I.data.fill(n.height = 256)
-
+I = c.createImageData(256, 256), I.data.fill(n.width = n.height = 256)
 t = 0
+o.font = '4em sans-serif'
 
 setInterval(_ => {
-    if (t % 500 < 250)
-        for (i = 0; i < 256 * 256; i += 1)
+    if (t % 1400 < 250)
+        for (i = 0; i < 256 * 256 || o.putImageData(I, 0, 0); i += 1)
             x = i % 256 - 128,
                 y = i / 256 - 128,
-                Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) < t % 500 * 2 && (I.data[i * 4] = I.data[i * 4 + 1] = I.data[i * 4 + 2] = Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) % 30 < 20 ? 0 : 256)
-    else
-        for (i = t % 7; i < 256 * 256; i += 7)
+                Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) < t % 1400 * 2 && (I.data[i * 4] = I.data[i * 4 + 1] = I.data[i * 4 + 2] = Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) % 30 < 20 ? 0 : 256)
+    else if (t % 1400 < 500)
+        for (i = t % 7; i < 256 * 256 || o.putImageData(I, 0, 0); i += 7)
             x = i % 256 - 128,
                 y = i / 256 - 128,
                 // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
@@ -23,9 +23,17 @@ setInterval(_ => {
                 I.data[i * 4] = 127 * k + 127 * Math.cos(t / 30 + v + Math.PI * k),
                 I.data[i * 4 + 1] = 127 * k + 127 * Math.cos(t / 10 + v * 2 + Math.PI * k),
                 I.data[i * 4 + 2] = 127 * k + 127 * Math.cos(t / 13 + v * 3 + Math.PI * k)
+    else
+        I.data.fill(256),
+            o.resetTransform(o.fillStyle = '#fff'),
+            o.fillRect(0, 0, 512, 512),
+            o.fillStyle = '#000',
+            o.fillText('Greets to everyone over at dwitter and jsgolf! Thanks Peter for organizing JS1K!', 1256 - t % 1400 * 2, 200),
+            o.rotate(Math.PI),
+            o.fillText('Greets to everyone over at dwitter and jsgolf! Thanks Peter for organizing JS1K!', 1000 - t % 1400 * 2, -56)
 
     c.resetTransform(c.globalAlpha = 1)
-    c.fillRect(~o.putImageData(I, 0, 0), 0, 512, 512)
+    c.fillRect(0, 0, 512, 512)
 
     // front/back
     c.setTransform(
