@@ -9,7 +9,7 @@ setInterval(_ => {
         for (i = 0; i < 256 * 256; i += 1)
             x = i % 256 - 128,
                 y = i / 256 - 128,
-                I.data[i * 4] = I.data[i * 4 + 1] = I.data[i * 4 + 2] = Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) % 30 < 20 && Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) < t % 500 * 2 ? 0 : 256
+                Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) < t % 500 * 2 && (I.data[i * 4] = I.data[i * 4 + 1] = I.data[i * 4 + 2] = Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) % 30 < 20 ? 0 : 256)
     else
         for (i = t % 7; i < 256 * 256; i += 7)
             x = i % 256 - 128,
