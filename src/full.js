@@ -1,20 +1,21 @@
 n = document.createElement`canvas`
 o = n.getContext`2d`
-I = c.createImageData(256, 256), I.data.fill(n.width = n.height = 256)
-t = 0
-o.font = '4em sans-serif'
+I = c.createImageData(256, 256),
+    I.data.fill(n.width = n.height = 256),
+    t = 0,
+    o.font = '4em sans-serif'
 
 setInterval(_ => {
-    if (t % 1400 < 250)
+    if (++t % 1400 < 250)
         for (i = 0; i < 256 * 256 || o.putImageData(I, 0, 0); i += 1)
             x = i % 256 - 128,
                 y = i / 256 - 128,
+                // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
                 Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) < t % 1400 * 2 && (I.data[i * 4] = I.data[i * 4 + 1] = I.data[i * 4 + 2] = Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99) % 30 < 20 ? 0 : 256)
     else if (t % 1400 < 500)
         for (i = t % 7; i < 256 * 256 || o.putImageData(I, 0, 0); i += 7)
             x = i % 256 - 128,
                 y = i / 256 - 128,
-                // http://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm
                 k = Math.abs(30 - Math.max(Math.min(Math.abs(x - y), Math.abs(x + y)), Math.max(Math.abs(x - y), Math.abs(x + y)) - 99)) > 10,
                 v = Math.sin(x * Math.cos(t / 99) / 33 - y * Math.sin(t / 99) / 33 + y * Math.cos(t / 99) / 33 + x * Math.sin(t / 99) / 33)
                 + Math.sin(y / 33)
@@ -67,6 +68,4 @@ setInterval(_ => {
         256 + Math.cos(t / 99 /*pitch*/) * Math.sign(Math.sin(t / 99 /*pitch*/)) * 128)
     c.globalAlpha = + Math.abs(Math.sin(t / 99 /*pitch*/))
     c.drawImage(n, -128, -128)
-
-    t++
 }, 33)
